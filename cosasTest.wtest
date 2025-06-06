@@ -79,3 +79,42 @@ describe "test contenedor portuario" {
       assert.equals(100, embalajeDeSeguridad.peligrosidad())
     }
   }
+
+  describe "test camion" {
+      method initialize(){ 
+        bumblebee.transformar(robot)
+        arenaGranel.peso(150)
+        paqueteLadrillos.cantLadrillos(80)
+        embalajeDeSeguridad.embalar(paqueteLadrillos)
+        camion.cargar(bumblebee)
+        camion.cargar(bateriaAntiaerea)
+        camion.cargar(paqueteLadrillos)
+      }
+    test "camion cargado con bumblebee robot,arenaGranel,bateriaAntiaerea, paquete de ladrillos embalado" {
+
+      assert.that(camion.cargaDelCamion().contains(bumblebee))
+      assert.that(camion.cargaDelCamion().contains(bateriaAntiaerea))
+      assert.that(camion.cargaDelCamion().contains(paqueteLadrillos))
+      assert.that(camion.hayAlgunaCosaQuepesa(160))
+    }
+    test "peso total del camion 2260"{
+      
+      assert.equals(800 + 300 + 160+ 1000, camion.pesoTotalDelCamion())
+      assert.that(camion.cargaDelCamion().contains(bumblebee))
+      assert.that(camion.cargaDelCamion().contains(bateriaAntiaerea))
+      assert.that(camion.cargaDelCamion().contains(paqueteLadrillos))
+     }
+
+    test"peso de las cosas cargadas es par" {
+      assert.that(camion.pesoDeLasCosasCargadasEsNumeroPar())
+    }     
+
+    test"cosa con mayor peligrosidad dentro de la carga del camion" {
+      assert.equals(bateriaAntiaerea, camion.obtenerLaPrimeraCosaCargadaConNivelDePeligrosidad(100))
+      
+    }
+
+    test"cosa mas liviana que tiene cargada el camion" {
+      assert.equals(paqueteLadrillos,camion.cosaMasLivianaQueTieneCargada() )
+    }
+  }

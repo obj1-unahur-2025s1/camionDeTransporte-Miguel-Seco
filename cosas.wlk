@@ -6,7 +6,7 @@ object knightRider {
 
 object bumblebee {
   var formaActual = auto
-  method peso() = 500
+  method peso() = 800
   method peligrosidad() = formaActual.peligrosidad()
   method transformar(unaForma) {
     formaActual = unaForma

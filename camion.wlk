@@ -4,6 +4,7 @@ import cosas.*
 object camion {
 const carga = []
 
+method cargaDelCamion() = carga
 method cargar(unaCosa){
     carga.add(unaCosa)
 }
@@ -17,7 +18,7 @@ method pesoDeLasCosasCargadasEsNumeroPar() = carga.all({c => c.peso() %2 == 0})
 
 method hayAlgunaCosaQuepesa(unPeso) = carga.any({c => c.peso() == unPeso})
 
-method obtenerLaPrimeraCosaCargadaConNivelDePeligrosidad(unNivel) = carga.findOrDefault({c => c.nivelDePeligrosidad() == unNivel}, null)
+method obtenerLaPrimeraCosaCargadaConNivelDePeligrosidad(unNivel) = carga.findOrDefault({c => c.peligrosidad() == unNivel}, null)
 
 method obtenerTodasLasCosasConNivelDePeligrosidad(unNivel) = carga.filter({c => c.nivelDePeligrosidad() > unNivel})
 

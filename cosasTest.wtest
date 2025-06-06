@@ -1,13 +1,81 @@
 import cosas.*
 import camion.*
 
-describe "test para  cosas" {
+describe "test para paquete de ladrillos" {
   method initialize(){
     paqueteLadrillos.agregarLadrillos(100)
   }
 
-  test "pack de ladrillos" {
-    assert.equals(100, paqueteLadrillos.peso())
+  test "peso del pack de ladrillos" {
+    assert.equals(200, paqueteLadrillos.peso())
+  }
+
+  test"se agregan 10 ladrillos al pack"{
+    paqueteLadrillos.agregarLadrillos(10)
+    assert.equals(110, paqueteLadrillos.cantLadrillos())
+  }
+
+  test"al pack de 100 se quitan 25 ladrillos al pack se espera 75"{
+    paqueteLadrillos.quitarLadrillos(25)
+    assert.equals(75, paqueteLadrillos.cantLadrillos())
+  }
+
+  test "peso del pack de ladrillos luego de quitar 25, se espera 150" {
+    paqueteLadrillos.quitarLadrillos(25)
+    assert.equals(150, paqueteLadrillos.peso())
   }
 
 }
+
+describe "test bateriaAntiAerea " {
+  test "estado actual de la bateria antiaerea tiene misiles" {
+    assert.equals(misiles,bateriaAntiaerea.estadoActual())
+  }
+  test " peso de la bateria con misiles 300"{
+    assert.equals(300,bateriaAntiaerea.peso())
+  }
+  test "estado actual de la bateria antiaerea cambia a otra cosa" {
+    bateriaAntiaerea.cambiarEstado(otraCosa)
+    assert.equals(otraCosa,bateriaAntiaerea.estadoActual())
+  }
+
+  test " peso de la bateria sin misiles se espera 200"{
+    bateriaAntiaerea.cambiarEstado(otraCosa)
+    assert.equals(200,bateriaAntiaerea.peso())
+  }
+}
+
+describe "test contenedor portuario" {
+  
+  method initialize(){
+    contenedorPortuario.agregarCosa(bumblebee )
+    contenedorPortuario.agregarCosa(knightRider)
+    contenedorPortuario.agregarCosa(bateriaAntiaerea)
+  }
+
+  test "peso del contenedor portuario sin cosas adentro" {
+    contenedorPortuario.quitarCosa(bumblebee )
+    contenedorPortuario.quitarCosa(knightRider )
+    contenedorPortuario.quitarCosa(bateriaAntiaerea)
+    assert.equals(100,contenedorPortuario.peso())
+  }
+
+  test "agregar 3 cosas al contenedor"{
+    assert.that(contenedorPortuario.cosasDelContenedor().contains(bumblebee))
+    assert.that(contenedorPortuario.cosasDelContenedor().contains(knightRider))
+    assert.that(contenedorPortuario.cosasDelContenedor().contains(bateriaAntiaerea))
+  }
+
+  test "peso del contenedor con 3 cosas adentro"{
+    assert.equals(500 + 500 + 300 + 100,contenedorPortuario.peso())
+  }
+  }
+
+  describe "test de embalajeDeSeguridad" {
+    test "embalar residuos radioactivos que pesan 30 kg" {
+      residuosRadioActivos.peso(30)
+      embalajeDeSeguridad.embalar(residuosRadioActivos)
+      assert.equals(30, embalajeDeSeguridad.peso())
+      assert.equals(100, embalajeDeSeguridad.peligrosidad())
+    }
+  }

@@ -22,7 +22,7 @@ object robot {
 }
 
 object paqueteLadrillos {
-  var cantLadrillos = 0
+  var property cantLadrillos = 0
 
   method peso() = cantLadrillos * 2
   method peligrosidad() = 2
@@ -41,6 +41,7 @@ object arenaGranel {
 
 object bateriaAntiaerea {
   var estadoBateria = misiles
+  method estadoActual() = estadoBateria
   method peso() = estadoBateria.peso()
   method peligrosidad() = estadoBateria.peligrosidad()
   method cambiarEstado(unEstado){
@@ -60,8 +61,12 @@ object otraCosa {
 object contenedorPortuario {
   const cosasAdentro = []
 
+  method cosasDelContenedor() = cosasAdentro
   method agregarCosa(unaCosa){
     cosasAdentro.add(unaCosa)
+  }
+  method quitarCosa(unaCosa){
+    cosasAdentro.remove(unaCosa)
   }
   method peso()= 100 + cosasAdentro.sum({c => c.peso()})
   method peligrosidad() = if(cosasAdentro.isEmpty()) cosasAdentro.max({c => c.peligrosidad()}) else 0

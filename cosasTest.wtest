@@ -1,9 +1,13 @@
 import cosas.*
+import camion.*
 
-describe "group of test for cosas" {
+describe "test para  cosas" {
+  method initialize(){
+    paqueteLadrillos.agregarLadrillos(100)
+  }
 
-  test "first test" {
-    assert.that(true)
+  test "pack de ladrillos" {
+    assert.equals(100, paqueteLadrillos.peso())
   }
 
 }
